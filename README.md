@@ -2,44 +2,38 @@
 
 ## About
 
-`Latex Sympy Calculator` parses **LaTeX math expressions** and converts it into the equivalent **SymPy form**. Then, **calculate it** and convert to latex result. 
+`Latex Sympy Calculator` parses **LaTeX math expressions** and converts it into the equivalent **SymPy form**. Then, **calculate it** and convert to latex result.
 
-It is designed for providing **people writing in latex or markdown** a ability to calculate something when writing math expression. It is based on `Python`, `Sympy` and [`latex2sympy2`](https://github.com/OrangeX4/latex2sympy) module.
+It is designed for providing **people writing in latex or markdown** a ability to calculate something when writing math expression. It is based on `Python`, `Sympy` and [`latex2sympy2`](https://github.com/IuvenisSapiens/latex2sympy) module.
 
-PS: If you want to install the extension, **PLEASE READ THE INSTALL DESCRIPTION!**
-
-![](https://picgo-1258602555.cos.ap-nanjing.myqcloud.com/latex2sympy.gif)
+> [!NOTE]
+> If you want to install the extension, **PLEASE READ THE INSTALL DESCRIPTION!**
 
 ## Features
 
-* **Arithmetic:** Add (+), Sub (-), Dot Mul (·), Cross Mul (×), Frac (/), Power (^), Abs (|x|), Sqrt (√), etc...
-* **Alphabet:** a - z, A - Z, α - ω, Subscript (x_1), Accent Bar(ā), etc...
-* **Common Functions:** gcd, lcm, floor, ceil, max, min, log, ln, exp, sin, cos, tan, csc, sec, cot, arcsin, sinh, arsinh, etc...
-* **Funcion Symbol:** f(x), f(x-1,), g(x,y), etc...
-* **Calculous:** Limit ($lim_{n\to\infty}$), Derivation ($\frac{d}{dx}(x^2+x)$), Integration ($\int xdx$), etc...
-* **Linear Algebra:** Matrix to raw echelon form, Determinant, Transpose, Inverse, Elementary Transformation, etc...
-* **Other:** Binomial...
+- **Arithmetic:** Add (+), Sub (-), Dot Mul (·), Cross Mul (×), Frac (/), Power (^), Abs (|x|), Sqrt (√), etc...
+- **Alphabet:** a - z, A - Z, α - ω, Subscript (x_1), Accent Bar(ā), etc...
+- **Common Functions:** gcd, lcm, floor, ceil, max, min, log, ln, exp, sin, cos, tan, csc, sec, cot, arcsin, sinh, arsinh, etc...
+- **Funcion Symbol:** f(x), f(x-1,), g(x,y), etc...
+- **Calculous:** Limit ($lim_{n\to\infty}$), Derivation ($\frac{d}{dx}(x^2+x)$), Integration ($\int xdx$), etc...
+- **Linear Algebra:** Matrix to raw echelon form, Determinant, Transpose, Inverse, Elementary Transformation, etc...
+- **Other:** Binomial...
 
 ## Install
 
-**IT IS IMPORTANT!**  
-**IT IS IMPORTANT!**  
-**IT IS IMPORTANT!**  
-
-Before you use the extension, please install python and two python modules: `latex2sympy` and `Flask`.
+> [!IMPORTANT]
+> Before you use the extension, please install python and two python modules: `latex2sympy2` and `Flask`.
 
 Install **Python** in [Python.org](https://www.python.org/), and then install **NECESSARY modules** by running:
 
-```
+```sh
 pip install latex2sympy2
 pip install Flask
 ```
 
 If you have installed it, you can run the code in terminal to test if you have installed it successfully.
 
-```
-python
-
+```python
 # Get into python environment
 import latex2sympy2
 import flask
@@ -49,35 +43,35 @@ If you want to use this extension in `Remote - SSH` or `Remote - WSL`, please **
 
 ## Usage
 
-![](./latex2sympy.gif)
+![ ](./latex2sympy.gif)
 
 ### Latex to Latex
 
 You can **SELECT** some text, and press `Shift + Ctrl + Alt + E` (equal) to get the result of the selected Latex text. It will be like:
 
-``` latex
+```latex
 # Before
 \frac{d}{dx}(x^3+x^2+1)
 
 # After
-\frac{d}{dx}(x^3+x^2+1) = x (3 x + 2) 
+\frac{d}{dx}(x^3+x^2+1) = x (3 x + 2)
 ```
 
 You can **SELECT** some text, and press `Shift + Ctrl + Alt + R` (replace) to get the result of the selected Latex text. It will be like:
 
-``` latex
+```latex
 # Before
 \frac{d}{dx}(x^3+x^2+1)
 
 # After
-x (3 x + 2) 
+x (3 x + 2)
 ```
 
 ### Factor and Expand
 
 You can **SELECT** some text, and press `Shift + Ctrl + Alt + F` (factor) to get the factor of the selected Latex text. It will be like:
 
-``` latex
+```latex
 # Before
 x^{2} + 2 x y + y^{2}
 
@@ -89,7 +83,7 @@ If you are using **windows**, the shortcut `Shift + Ctrl + Alt + F` may be inval
 
 You can **SELECT** some text, and press `Shift + Ctrl + Alt + X` (expand) to get the expand of the selected Latex text. It will be like:
 
-``` latex
+```latex
 # Before
 (x + y)^{2}
 
@@ -101,7 +95,7 @@ x^{2} + 2 x y + y^{2}
 
 You can **SELECT** some text, and press `Shift + Ctrl + Alt + N` (numerical) to get the numerical result of the selected Latex text. It will be like:
 
-``` latex
+```latex
 # Before
 \sqrt{2}
 
@@ -111,7 +105,7 @@ You can **SELECT** some text, and press `Shift + Ctrl + Alt + N` (numerical) to 
 
 ### Solve Equation
 
-``` latex
+```latex
 # Before
 x + y = 1
 
@@ -121,7 +115,7 @@ x + y = 1
 
 ### Eval At
 
-``` latex
+```latex
 # Before
 (x+2)|_{x=y+1}
 
@@ -132,7 +126,8 @@ y + 3
 ### Matrix to raw echelon form
 
 You can **SELECT** matrix, then press `Shift + Ctrl + Alt + T` to transform it to raw echelon form in one action
-``` latex
+
+```latex
 # Before
 \begin{bmatrix}
     1 & 2 & 3\\
@@ -140,20 +135,21 @@ You can **SELECT** matrix, then press `Shift + Ctrl + Alt + T` to transform it t
     7 & 8 & 9
 \end{bmatrix}
 
-# After 
+# After
 \begin{bmatrix}
     1 & 2 & 3\\
     4 & 5 & 6\\
     7 & 8 & 9
 \end{bmatrix} \to \begin{bmatrix}1 & 0 & -1\\0 & 1 & 2\\0 & 0 & 0\end{bmatrix}
 ```
+
 <img src="./matrix-transformation-example.png" width="200">
 
 ### Variances
 
 You can **ASSIGN** variance a value. Use `Shift + Ctrl + Alt + D` (define) and grammar like `y = x + 1`.
 
-``` latex
+```latex
 # Shift + Ctrl + D
 y = x + 1
 
@@ -168,7 +164,7 @@ PS: You can use grammar like `y == x + 1` to describe the relation of equality.
 
 If you want to see the bonding of variances, you can press `Shift + Ctrl + P`, and input `latex-sympy-calculator: Show Current variances`, then you will get data like:
 
-``` latex
+```latex
 y = x + 1
 z = 2x
 ```
@@ -179,12 +175,11 @@ If you want to let your variances be complex numbers, you can press `Shift + Ctr
 
 For example, `x = 1 + 2i`, `\int \cos xe^{-ikx}dx`.
 
-
 ### Matrix Symbol
 
 You can **DEFINE** variance a matrix symbol. Use `Shift + Ctrl + Alt + D` (define) and grammar like `X \in \mathbb{R}^{n \times m}`.
 
-``` latex
+```latex
 # Shift + Ctrl + D
 X \in \mathbb{R}^{n \times m}
 
@@ -209,7 +204,7 @@ You can calculate a python expression by `Shift + Ctrl + Alt + P`.
 
 For example, you can get variances you assigned by:
 
-``` python
+```python
 # Before
 var['y']
 
@@ -219,7 +214,7 @@ var['y'] = x + 1
 
 Calculator the roots of the equation:
 
-``` python
+```python
 # Before
 solve([2 * x - y - 3, 3 * x + y - 7],[x, y])
 
@@ -229,7 +224,7 @@ solve([2 * x - y - 3, 3 * x + y - 7],[x, y]) = {x: 2, y: 1}
 
 Convert latex to sympy and convert sympy to latex:
 
-``` python
+```python
 # Latex to Sympy
 expr = latex2sympy(r'x^2 + 3x + 1')
 
@@ -242,10 +237,10 @@ result = latex2latex(r'\frac{d}{dx}(x^3+x^2+1)')
 
 **For example, you can calculator eigenvector with problem solving process:**
 
-``` latex
-For matrix: $A=\begin{bmatrix}	5 &6 &-3 \\	-1 &0 &1 \\	1 &2 &-1 \\\end{bmatrix}$
+```latex
+For matrix: $A=\begin{bmatrix} 5 &6 &-3 \\ -1 &0 &1 \\ 1 &2 &-1 \\\end{bmatrix}$
 
-Let $B=\lambda\begin{bmatrix}1 &0 &0 \\0 &1 &0 \\0 &0 &1 \\\end{bmatrix}-\begin{bmatrix}	5 &6 &-3 \\	-1 &0 &1 \\	1 &2 &-1 \\\end{bmatrix}=\left[\begin{matrix}\lambda - 5 & -6 & 3\\1 & \lambda & -1\\-1 & -2 & \lambda + 1\end{matrix}\right]$
+Let $B=\lambda\begin{bmatrix}1 &0 &0 \\0 &1 &0 \\0 &0 &1 \\\end{bmatrix}-\begin{bmatrix} 5 &6 &-3 \\ -1 &0 &1 \\ 1 &2 &-1 \\\end{bmatrix}=\left[\begin{matrix}\lambda - 5 & -6 & 3\\1 & \lambda & -1\\-1 & -2 & \lambda + 1\end{matrix}\right]$
 
 Its determinant is $latex(var["B"].doit().det()) = \lambda^{3} - 4 \lambda^{2} + 2 \lambda + 4$
 
@@ -257,7 +252,7 @@ Or via:$latex(var["A"].eigenvals()) = \left\{ 2 : 1, \  1 - \sqrt{3} : 1, \  1 +
 
 Let $\lambda_1=2, \lambda_2=1-\sqrt{3}, \lambda_3=1+\sqrt{3}$
 
-So $B_1=\lambda_1\begin{bmatrix}1 &0 &0 \\0 &1 &0 \\0 &0 &1 \\\end{bmatrix}-\begin{bmatrix}	5 &6 &-3 \\	-1 &0 &1 \\	1 &2 &-1 \\\end{bmatrix}=\left[\begin{matrix}-3 & -6 & 3\\1 & 2 & -1\\-1 & -2 & 3\end{matrix}\right]$
+So $B_1=\lambda_1\begin{bmatrix}1 &0 &0 \\0 &1 &0 \\0 &0 &1 \\\end{bmatrix}-\begin{bmatrix} 5 &6 &-3 \\ -1 &0 &1 \\ 1 &2 &-1 \\\end{bmatrix}=\left[\begin{matrix}-3 & -6 & 3\\1 & 2 & -1\\-1 & -2 & 3\end{matrix}\right]$
 
 Assign it: $B_1=\left[\begin{matrix}-3 & -6 & 3\\1 & 2 & -1\\-1 & -2 & 3\end{matrix}\right]$
 

@@ -1,7 +1,5 @@
 from flask import Flask, request
 import json
-import latex2sympy2
-import sympy
 from sympy.abc import *
 from sympy import *
 from latex2sympy2 import latex2latex, latex2sympy, var, variances, set_variances, set_real, latex
