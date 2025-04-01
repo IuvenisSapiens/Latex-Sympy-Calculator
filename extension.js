@@ -36,7 +36,7 @@ function activate(context) {
     }
 
     // run auto update
-    exec(python_path + ' -m pip install --upgrade latex2sympy2', (err, stdout, stderr) => {
+    exec(python_path + ' -m pip install --upgrade latex2sympy2_extended', (err, stdout, stderr) => {
         
         if (err) {
             console.log(err)
