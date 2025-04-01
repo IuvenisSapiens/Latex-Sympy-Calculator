@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from sympy import *
+from sympy import apart, expand, expand_trig, factor, latex, simplify
 from latex2sympy2_extended import latex2latex, latex2sympy
 from latex2sympy2_extended.latex2sympy2 import _Latex2Sympy
 app = Flask(__name__)
