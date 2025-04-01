@@ -56,13 +56,13 @@ function activate(context) {
 
     py.on('error', (err) => {
         console.log(err)
-        vscode.window.showErrorMessage('Running python failed... Please read the guide and make sure you have install "python", "latex2sympy2" and "Flask"')
+        vscode.window.showErrorMessage('Running python failed... Please read the guide and make sure you have install "python", "latex2sympy2_extended" and "Flask"')
     })
     
     py.on('exit', (code) => {
         console.log(`Exit Code: ${code}`)
-        vscode.window.showErrorMessage('Running python failed... Please make sure you have "latex2sympy2 >= 1.8.0" and "Flask"')
-        vscode.window.showErrorMessage('You can update it by "pip install --upgrade latex2sympy2" and reboot your computer')
+        vscode.window.showErrorMessage('Running python failed... Please make sure you have "latex2sympy2_extended" and "Flask"')
+        vscode.window.showErrorMessage('You can update it by "pip install --upgrade latex2sympy2_extended" and reboot your computer')
     })
 
     /**
