@@ -64,14 +64,20 @@ def solve_equations_api():
 @app.route('/set-var', methods=['POST'])
 def set_var():
     try:
-        # 假设data的格式是 'key = value'
+        # 假设data的格式是 'key = value' 或 'key == value'
         data = request.json['data']
-        key, value = data.split(' = ')
+        if '==' in data:
+            key, value = data.split('==')
+        elif '=' in data:
+            key, value = data.split('=')
+        else:
+            raise ValueError("数据格式不正确，应包含 '=' 或 '=='")
+
         key = key.strip()
         value = value.strip()
 
         # 将处理后的键值对添加到converter.var字典中
-        converter.var[key] = value
+        converter.var[str(latex2sympy(key))] = str(latex2sympy(value))
 
         return jsonify({
             'data': '',
@@ -82,8 +88,6 @@ def set_var():
             'data': '',
             'error': str(e)
         })
-
-
 
 @app.route('/latex', methods=['POST'])
 def get_latex():
