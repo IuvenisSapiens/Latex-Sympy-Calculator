@@ -135,6 +135,9 @@ function activate(context) {
      * @param {function} onSuccess
      * @param {function} onError
      */
+    function setVar(latex, onSuccess, onError) {
+        post(latex, '/set-var', onSuccess, onError)
+    }
     function sendLatex(latex, onSuccess, onError) {
         post(latex, '/latex', onSuccess, onError)
     }
@@ -282,7 +285,7 @@ function activate(context) {
             let selection = editor.selection
             let text = doc.getText(selection)
 
-            sendLatex(text, () => {
+            setVar(text, () => {
                 vscode.window.showInformationMessage('Define: ' + text)
             }, (err) => {
                 vscode.window.showErrorMessage(err)
