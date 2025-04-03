@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from re import findall, split, MULTILINE
 from sympy import *
 from sympy.abc import *
 from latex2sympy2_extended import latex2latex, latex2sympy
@@ -8,10 +9,58 @@ app = Flask(__name__)
 # 初始化全局变量
 converter = _Latex2Sympy(is_real=False, convert_degrees=False)
 
+def solve_equations(latex_str, formatter='sympy'):
+    # 查找是否有 cases 或 dcases 环境的方程组
+    regex_cases_dcases = r"\\begin{(cases|dcases)}([\s\S]*)\\end{\1}"
+    matches_cases_dcases = findall(regex_cases_dcases, latex_str, MULTILINE)
+    equations = []
+    if matches_cases_dcases:
+        matches_cases_dcases = split(r"\\\\(?:\[?.*?\])?", matches_cases_dcases[0][1])
+        for match in matches_cases_dcases:
+            ins = latex2sympy(match)
+            if isinstance(ins, list):
+                equations.extend(ins)
+            else:
+                equations.append(ins)
+    else:
+        # 如果没有 cases 或 dcases 环境，则尝试直接解析单行方程
+        try:
+            # 使用 parse_latex 解析 LaTeX 字符串
+            equation = latex2sympy(latex_str)
+            equations = [equation]
+        except Exception as e:
+            # 如果解析失败，返回 False
+            return False
+    
+    # 求解方程或方程组
+    solved = solve(equations)
+    
+    # 根据 formatter 参数决定返回格式
+    if formatter == 'latex':
+        return latex(solved)
+    else:
+        return solved
+
 @app.route('/')
 def main():
     return 'Latex Sympy Calculator Server'
 
+@app.route('/solve-equations', methods=['POST'])
+def solve_equations_api():
+    try:
+        latex_str = request.json['data']
+        formatter = 'latex'
+        solved = solve_equations(latex_str, formatter)
+        return jsonify({
+            'data': solved,
+            'error': '',            
+        })
+    except Exception as e:
+        return jsonify({
+            'data': '',
+            'error': str(e)
+        }) 
+        
 @app.route('/set-var', methods=['POST'])
 def set_var():
     try:

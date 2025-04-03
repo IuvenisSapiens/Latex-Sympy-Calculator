@@ -135,6 +135,9 @@ function activate(context) {
      * @param {function} onSuccess
      * @param {function} onError
      */
+    function solveEquations(latex, onSuccess, onError) {
+        post(latex, '/solve-equations', onSuccess, onError)
+    }
     function setVar(latex, onSuccess, onError) {
         post(latex, '/set-var', onSuccess, onError)
     }
@@ -168,6 +171,27 @@ function activate(context) {
                 if (!editor) { return }
                 editor.edit((edit) => {
                     edit.insert(selection.end, ' = ' + data)
+                })  
+            }, (err) => {
+                vscode.window.showErrorMessage(err)
+            })
+        })
+    )
+
+
+    context.subscriptions.push(
+        vscode.commands.registerCommand('latex-sympy-calculator.solve', function () {
+            let editor = vscode.window.activeTextEditor
+            if (!editor) { return }
+            let doc = editor.document
+            let selection = editor.selection
+            let text = doc.getText(selection)
+
+            solveEquations(text, (data) => {
+                let editor = vscode.window.activeTextEditor
+                if (!editor) { return }
+                editor.edit((edit) => {
+                    edit.insert(selection.end, ' \\Rightarrow ' + data)
                 })  
             }, (err) => {
                 vscode.window.showErrorMessage(err)

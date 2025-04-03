@@ -60,6 +60,11 @@
             },
             {
                 "category": "Latex-Sympy-Calculator",
+                "command": "latex-sympy-calculator.solve",
+                "title": "Solve selected equations"
+            },
+            {
+                "category": "Latex-Sympy-Calculator",
                 "command": "latex-sympy-calculator.matrix-raw-echelon-form",
                 "title": "Transform matrix to raw echelon form"
             },
@@ -99,6 +104,12 @@
                 "command": "latex-sympy-calculator.equal",
                 "key": "Shift+Ctrl+Alt+E",
                 "mac": "Shift+Cmd+Alt+E",
+                "when": "editorTextFocus && editorHasSelection"
+            },
+            {
+                "command": "latex-sympy-calculator.solve",
+                "key": "Shift+Ctrl+Alt+S",
+                "mac": "Shift+Cmd+Alt+S",
                 "when": "editorTextFocus && editorHasSelection"
             },
             {
@@ -154,7 +165,7 @@
         "@types/vscode": "1.98.0",
         "@types/glob": "8.1.0",
         "@types/mocha": "10.0.10",
-        "@types/node": "22.13.16",
+        "@types/node": "22.14.0",
         "eslint": "9.23.0",
         "glob": "11.0.1",
         "mocha": "11.2.0",
