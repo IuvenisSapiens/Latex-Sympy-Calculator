@@ -4,7 +4,7 @@
 
 `Latex Sympy Calculator` parses **LaTeX math expressions** and converts it into the equivalent **SymPy form**. Then, **calculate it** and convert to latex result.
 
-It is designed for providing **people writing in latex or markdown** a ability to calculate something when writing math expression. It is based on `Python`, `Sympy` and [`latex2sympy2`](https://github.com/IuvenisSapiens/latex2sympy) module.
+It is designed for providing **people writing in latex or markdown** a ability to calculate something when writing math expression. It is based on `Python`, `Sympy` and [`latex2sympy2_extended`](https://github.com/IuvenisSapiens/latex2sympy2_extended) module.
 
 > [!NOTE]
 > If you want to install the extension, **PLEASE READ THE INSTALL DESCRIPTION!**
@@ -22,12 +22,12 @@ It is designed for providing **people writing in latex or markdown** a ability t
 ## Install
 
 > [!IMPORTANT]
-> Before you use the extension, please install python and two python modules: `latex2sympy2` and `Flask`.
+> Before you use the extension, please install python and two python modules: `latex2sympy2_extended` and `Flask`.
 
 Install **Python** in [Python.org](https://www.python.org/), and then install **NECESSARY modules** by running:
 
 ```sh
-pip install latex2sympy2
+pip install latex2sympy2_extended
 pip install Flask
 ```
 
@@ -35,7 +35,7 @@ If you have installed it, you can run the code in terminal to test if you have i
 
 ```python
 # Get into python environment
-import latex2sympy2
+import latex2sympy2_extended
 import flask
 ```
 
