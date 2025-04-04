@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from re import findall, split, MULTILINE
+from re import match as re_match
 from sympy import *
 from sympy.abc import *
 from latex2sympy2_extended import latex2latex, latex2sympy
@@ -60,25 +61,31 @@ def solve_equations_api():
             'data': '',
             'error': str(e)
         }) 
-        
+
 @app.route('/set-var', methods=['POST'])
 def set_var():
     try:
         # 假设data的格式是 'key = value' 或 'key == value'
         data = request.json['data']
-        if '==' in data:
-            key, value = data.split('==')
-        elif '=' in data:
-            key, value = data.split('=')
+        print(data)
+        # 使用正则表达式来分割key和value
+        match = re_match(r'^(.*?)\s*(:=|==|=)\s*(.*)$', data)
+        if match:
+            key = match.group(1)
+            print(key)
+            _operator = match.group(2)
+            print(_operator)
+            value = match.group(3)
+            print(value)
         else:
-            raise ValueError("数据格式不正确，应包含 '=' 或 '=='")
+            raise ValueError("数据格式不正确，应包含 ':=', '==', 或 '=' 符号。")
 
         key = key.strip()
         value = value.strip()
-
+        
         # 将处理后的键值对添加到converter.var字典中
         converter.var[str(latex2sympy(key))] = str(latex2sympy(value))
-
+        print(converter.var)
         return jsonify({
             'data': '',
             'error': ''
@@ -88,6 +95,7 @@ def set_var():
             'data': '',
             'error': str(e)
         })
+
 
 @app.route('/latex', methods=['POST'])
 def get_latex():
