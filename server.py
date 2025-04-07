@@ -3,6 +3,7 @@ from re import findall, split, MULTILINE
 from re import match as re_match
 from re import search as re_search
 from sympy import *
+from sympy import EulerGamma, GoldenRatio, Catalan, pi, E, I, oo, nan
 from sympy.abc import *
 from sympy.plotting import plot
 from latex2sympy2_extended import latex2latex, latex2sympy
