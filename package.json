@@ -6,7 +6,7 @@
     "icon": "icon.png",
     "version": "1.7.0",
     "engines": {
-        "vscode": "^1.98.0"
+        "vscode": "^1.99.0"
     },
     "categories": [
         "Data Science",
@@ -162,15 +162,15 @@
         "test": "node ./test/runTest.js"
     },
     "devDependencies": {
-        "@types/vscode": "1.98.0",
+        "@types/vscode": "1.99.1",
         "@types/glob": "8.1.0",
         "@types/mocha": "10.0.10",
         "@types/node": "22.14.0",
-        "eslint": "9.23.0",
+        "eslint": "9.24.0",
         "glob": "11.0.1",
         "mocha": "11.2.0",
-        "typescript": "5.8.2",
-        "@vscode/test-electron": "2.4.1"
+        "typescript": "5.8.3",
+        "@vscode/test-electron": "2.5.1"
     },
     "dependencies": {},
     "license": "MIT",
