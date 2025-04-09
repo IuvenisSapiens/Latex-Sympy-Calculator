@@ -3,9 +3,9 @@ from re import findall, split, MULTILINE
 from re import match as re_match
 from re import search as re_search
 from sympy import *
-from sympy import EulerGamma, GoldenRatio, Catalan, TribonacciConstant, pi, E, I, oo, nan
+from sympy import EulerGamma, GoldenRatio, Catalan, TribonacciConstant, pi, E, I, oo, nan, zoo
 from sympy.abc import *
-from sympy.plotting import plot
+from sympy.plotting import plot, plot_parametric, plot_implicit, plot3d, plot3d_parametric_line, plot3d_parametric_surface
 from latex2sympy2_extended import latex2latex, latex2sympy
 from latex2sympy2_extended.latex2sympy2 import _Latex2Sympy, ConversionConfig
 app = Flask(__name__)
