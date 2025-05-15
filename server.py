@@ -15,7 +15,7 @@ converter = _Latex2Sympy(is_real=False, convert_degrees=False)
 
 def solve_equations(latex_str, formatter='sympy'):
     # 查找是否有 cases 或 dcases 环境的方程组
-    regex_cases_dcases = r"\\begin{(cases|dcases)}([\s\S]*)\\end{\1}"
+    regex_cases_dcases = r"\\begin{(cases|dcases|rcases)}([\s\S]*)\\end{\1}"
     matches_cases_dcases = findall(regex_cases_dcases, latex_str, MULTILINE)
     equations = []
     if matches_cases_dcases:
@@ -138,8 +138,8 @@ def get_latex():
             'error': str(e)
         })
 
-@app.route('/matrix-raw-echelon-form', methods=['POST'])
-def get_matrix_raw_echelon_form():
+@app.route('/matrix-reduced-row-echelon-form', methods=['POST'])
+def get_matrix_reduced_row_echelon_form():
     try:
         parsed_math = latex2sympy(request.json['data'], variable_values=converter.var, conversion_config=ConversionConfig(lowercase_symbols=False))
         return jsonify({

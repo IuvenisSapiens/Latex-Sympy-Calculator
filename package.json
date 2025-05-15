@@ -4,9 +4,9 @@
     "publisher": "IuvenisSapiens",
     "description": "Convert Latex to Sympy and calculate it in Latex or Markdown.",
     "icon": "icon.png",
-    "version": "1.7.0",
+    "version": "1.7.1",
     "engines": {
-        "vscode": "^1.99.0"
+        "vscode": "^1.100.0"
     },
     "categories": [
         "Data Science",
@@ -65,8 +65,8 @@
             },
             {
                 "category": "Latex-Sympy-Calculator",
-                "command": "latex-sympy-calculator.matrix-raw-echelon-form",
-                "title": "Transform matrix to raw echelon form"
+                "command": "latex-sympy-calculator.matrix-reduced-row-echelon-form",
+                "title": "Transform matrix to reduced row echelon form"
             },
             {
                 "category": "Latex-Sympy-Calculator",
@@ -113,7 +113,7 @@
                 "when": "editorTextFocus && editorHasSelection"
             },
             {
-                "command": "latex-sympy-calculator.matrix-raw-echelon-form",
+                "command": "latex-sympy-calculator.matrix-reduced-row-echelon-form",
                 "key": "Shift+Ctrl+Alt+T",
                 "mac": "Shift+Cmd+Alt+T",
                 "when": "editorTextFocus && editorHasSelection"
@@ -162,15 +162,15 @@
         "test": "node ./test/runTest.js"
     },
     "devDependencies": {
-        "@types/vscode": "1.99.1",
+        "@types/vscode": "1.100.0",
         "@types/glob": "8.1.0",
         "@types/mocha": "10.0.10",
-        "@types/node": "22.14.0",
-        "eslint": "9.24.0",
-        "glob": "11.0.1",
-        "mocha": "11.2.0",
+        "@types/node": "22.15.18",
+        "eslint": "9.26.0",
+        "glob": "11.0.2",
+        "mocha": "11.2.2",
         "typescript": "5.8.3",
-        "@vscode/test-electron": "2.5.1"
+        "@vscode/test-electron": "2.5.2"
     },
     "dependencies": {},
     "license": "MIT",
