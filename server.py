@@ -21,16 +21,16 @@ def solve_equations(latex_str, formatter='sympy'):
     if matches_cases_dcases:
         matches_cases_dcases = split(r"\\\\(?:\[?.*?\])?", matches_cases_dcases[0][1])
         for match in matches_cases_dcases:
-            ins = latex2sympy(match, conversion_config=ConversionConfig(lowercase_symbols=False))
+            ins = latex2sympy(match, variable_values=converter.var, conversion_config=ConversionConfig(lowercase_symbols=False))
             if isinstance(ins, list):
                 equations.extend(ins)
             else:
                 equations.append(ins)
     else:
-        # 如果没有 cases 或 dcases 环境，则尝试直接解析单行方程
+        # 如果没有 cases/dcases/rcases 环境，则尝试直接解析单行方程
         try:
             # 使用 parse_latex 解析 LaTeX 字符串
-            equation = latex2sympy(latex_str, conversion_config=ConversionConfig(lowercase_symbols=False))
+            equation = latex2sympy(latex_str, variable_values=converter.var, conversion_config=ConversionConfig(lowercase_symbols=False))
             equations = [equation]
         except Exception as e:
             # 如果解析失败，返回 False
@@ -107,10 +107,10 @@ def set_var():
 
         else:
             # 对于其他操作符，直接使用 latex2sympy 进行解析
-            X = str(latex2sympy(value, conversion_config=ConversionConfig(lowercase_symbols=False)))
+            X = str(latex2sympy(value, variable_values=converter.var, conversion_config=ConversionConfig(lowercase_symbols=False)))
 
         # 将处理后的键值对添加到converter.var字典中
-        converter.var[str(latex2sympy(key, conversion_config=ConversionConfig(lowercase_symbols=False)))] = X
+        converter.var[str(latex2sympy(key, variable_values=converter.var, conversion_config=ConversionConfig(lowercase_symbols=False)))] = X
 
         print(converter.var)
         return jsonify({

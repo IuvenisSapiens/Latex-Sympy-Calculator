@@ -4,7 +4,7 @@
     "publisher": "IuvenisSapiens",
     "description": "Convert Latex to Sympy and calculate it in Latex or Markdown.",
     "icon": "icon.png",
-    "version": "1.7.1",
+    "version": "1.7.2",
     "engines": {
         "vscode": "^1.100.0"
     },
