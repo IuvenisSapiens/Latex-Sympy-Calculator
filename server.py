@@ -143,7 +143,7 @@ def get_matrix_reduced_row_echelon_form():
     try:
         parsed_math = latex2sympy(request.json['data'], variable_values=converter.var, conversion_config=ConversionConfig(lowercase_symbols=False))
         return jsonify({
-            'data': latex(parsed_math.subs(converter.var).rref()[0]).replace(r'\left[\begin{matrix}', r'\begin{pmatrix}', -1).replace(r'\end{matrix}\right]', r'\end{pmatrix}', -1),
+            'data': latex(parsed_math.rref()[0]).replace(r'\left[\begin{matrix}', r'\begin{pmatrix}', -1).replace(r'\end{matrix}\right]', r'\end{pmatrix}', -1),
             'error': ''
         })
     except Exception as e:
@@ -157,7 +157,7 @@ def get_numerical():
     try:
         parsed_math = latex2sympy(request.json['data'], variable_values=converter.var, conversion_config=ConversionConfig(lowercase_symbols=False))
         return jsonify({
-            'data': latex(simplify(parsed_math.subs(converter.var).doit().doit()).evalf(subs=converter.variances)),
+            'data': latex(simplify(parsed_math.doit().doit()).evalf()),
             'error': ''
         })
     except Exception as e:
@@ -170,8 +170,22 @@ def get_numerical():
 def get_factor():
     try:
         parsed_math = latex2sympy(request.json['data'], variable_values=converter.var, conversion_config=ConversionConfig(lowercase_symbols=False))
+        if parsed_math.is_real and parsed_math - int(parsed_math) == 0:
+            number = int(parsed_math)
+            # 计算素数分解
+            factors = factorint(number)
+            # 将结果转换为 LaTeX 格式
+            result_latex = " \\times ".join(
+                f"{base}^{{{exp}}}" if exp > 1 else f"{base}"
+                for base, exp in factors.items()
+            )
+        else:
+            factored_expr = factor(parsed_math)
+            # 将结果转换为 LaTeX 格式
+            result_latex = latex(factored_expr)
+        
         return jsonify({
-            'data': latex(factor(parsed_math.subs(converter.var))),
+            'data': result_latex,
             'error': ''
         })
     except Exception as e:
@@ -185,14 +199,14 @@ def get_expand():
     try:
         parsed_math = latex2sympy(request.json['data'], variable_values=converter.var, conversion_config=ConversionConfig(lowercase_symbols=False))
         return jsonify({
-            'data': latex(expand(apart(expand_trig(parsed_math.subs(converter.var))))),
+            'data': latex(expand(apart(expand_trig(parsed_math)))),
             'error': ''
         })
     except Exception as _:
         try:
             parsed_math = latex2sympy(request.json['data'], variable_values=converter.var, conversion_config=ConversionConfig(lowercase_symbols=False))
             return jsonify({
-                'data': latex(expand(expand_trig(parsed_math.subs(converter.var)))),
+                'data': latex(expand(expand_trig(parsed_math))),
                 'error': ''
             })
         except Exception as e:
