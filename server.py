@@ -14,13 +14,14 @@ app = Flask(__name__)
 converter = _Latex2Sympy(is_real=False, convert_degrees=False)
 
 def solve_equations(latex_str, formatter='sympy'):
-    # 查找是否有 cases 或 dcases 环境的方程组
+    # 查找是否有 cases/dcases/rcases 环境的方程组
     regex_cases_dcases = r"\\begin{(cases|dcases|rcases)}([\s\S]*)\\end{\1}"
-    matches_cases_dcases = findall(regex_cases_dcases, latex_str, MULTILINE)
+    matches_cases_dcases_rcases = findall(regex_cases_dcases, latex_str, MULTILINE)
     equations = []
-    if matches_cases_dcases:
-        matches_cases_dcases = split(r"\\\\(?:\[?.*?\])?", matches_cases_dcases[0][1])
-        for match in matches_cases_dcases:
+    if matches_cases_dcases_rcases:
+        # 如果有 cases/dcases/rcases 环境，则解析每一行
+        matches_cases_dcases_rcases = split(r"\\\\(?:\[?.*?\])?", matches_cases_dcases_rcases[0][1])
+        for match in matches_cases_dcases_rcases:
             ins = latex2sympy(match, variable_values=converter.var, conversion_config=ConversionConfig(lowercase_symbols=False))
             if isinstance(ins, list):
                 equations.extend(ins)
@@ -68,7 +69,7 @@ def solve_equations_api():
 @app.route('/set-var', methods=['POST'])
 def set_var():
     try:
-        # 假设data的格式是 'key = value' 或 'key == value'
+        # 假设data的格式是 'key := value'/'key == value'/'key = value'/'key \in value'
         data = request.json['data']
         print(data)
         # 使用正则表达式来分割key和value
@@ -100,6 +101,10 @@ def set_var():
                 elif dimensions[0].isidentifier() and dimensions[1].isidentifier():
                     # 如果是矩阵的变量维度，保持字符串形式
                     X = MatrixSymbol(f'{key}', Symbol(dimensions[0]), Symbol(dimensions[1]))
+                elif dimensions[0].isdigit() and dimensions[1].isidentifier():
+                    X = MatrixSymbol(f'{key}', int(dimensions[0]), Symbol(dimensions[1]))
+                elif dimensions[0].isidentifier() and dimensions[1].isdigit():
+                    X = MatrixSymbol(f'{key}', Symbol(dimensions[0]), int(dimensions[1]))
                 else:
                     raise ValueError("应为形如 \\mathbb{R}^{m \\times n} 的格式，且m和n应为数字或变量标识符")
             except Exception as e:

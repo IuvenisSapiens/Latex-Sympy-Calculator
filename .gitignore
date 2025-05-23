@@ -1,3 +1,7 @@
 node_modules
 .vscode-test/
 *.vsix
+cls_var.py
+extract_equations.js
+set_vars.js
+set_vars.py
