@@ -162,7 +162,7 @@ def get_numerical():
     try:
         parsed_math = latex2sympy(request.json['data'], variable_values=converter.var, conversion_config=ConversionConfig(lowercase_symbols=False))
         return jsonify({
-            'data': latex(simplify(parsed_math.doit().doit()).evalf()),
+            'data': latex(simplify(parsed_math.doit().doit()).evalf()).replace(r'\left[\begin{matrix}', r'\begin{pmatrix}', -1).replace(r'\end{matrix}\right]', r'\end{pmatrix}', -1),
             'error': ''
         })
     except Exception as e:
